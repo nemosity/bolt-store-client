@@ -1,7 +1,7 @@
 export interface Order {
-  orderNumber: number;
-  customer: string;
-  product: string;
-  options: any;
-  pickup: Date;
+  UserId: string;
+  StoreId: string;
+  Items: any;
+  Status: string;
+  Date: Date;
 }

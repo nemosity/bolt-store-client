@@ -1,11 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { reducers, metaReducers } from './reducers';
 import { CustomRouterStateSerializer } from './shared/utils';
+
+import { EffectsModule } from '@ngrx/effects';
+import { Effects } from './effects';
+
+import { Services } from './services';
 
 import { environment } from '../environments/environment';
 
@@ -37,6 +43,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
@@ -59,9 +66,16 @@ const appRoutes: Routes = [
     StoreDevtoolsModule.instrument({
       name: 'NgRx Store DevTools',
       logOnly: environment.production,
-    })
+    }),
+    EffectsModule.forRoot(Effects)
   ],
-  providers: [{ provide: RouterStateSerializer, useClass: CustomRouterStateSerializer }],
+  providers: [
+    ...Services,
+    {
+      provide: RouterStateSerializer,
+      useClass: CustomRouterStateSerializer
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

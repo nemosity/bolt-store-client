@@ -1,18 +1,18 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Customer</th>
+      <th scope="col">Store</th>
       <th scope="col">Order Details</th>
       <th scope="col">Pick Up Time</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor='let order of orders'>
-      <th scope="row">{{order.orderNumber}}</th>
-      <td>{{order.customer}}</td>
-      <td>{{order.options.option}}: {{order.options.variation}}</td>
-      <td>{{order.pickup | date:'shortTime'}}</td>
+      <th scope="row">{{order.UserId}}</th>
+      <td>{{order.StoreId}}</td>
+      <td>{{order.Items[0].ProductId}} | {{order.Items[0].Config[0].OptionId}}: {{order.Items[0].Config[0].VariationId}}</td>
+      <td>{{order.Date | date:'shortTime'}}</td>
     </tr>
   </tbody>
 </table>

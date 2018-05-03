@@ -1,4 +1,10 @@
 <h3>
   Orders
 </h3>
-<app-order-list></app-order-list>
+<div *ngIf="isLoading$ | async; else show" class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+      aria-valuemax="100" style="width: 100%"></div>
+  </div>
+<ng-template #show>
+    <app-order-list [orders]="orders$ | async"></app-order-list>
+</ng-template>

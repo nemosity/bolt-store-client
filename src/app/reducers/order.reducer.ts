@@ -21,14 +21,15 @@ export function reducer(state: State = initialState, action: OrderActionsUnion):
       };
     }
 
-    case OrderActionTypes.GET_ORDERS_FAIL: {
+    case OrderActionTypes.GET_ORDERS_SUCCESS: {
       return { ...state,
+        data: action.payload.orders,
         isLoading: false,
         error: null
       };
     }
 
-    case OrderActionTypes.GET_ORDERS_SUCCESS: {
+    case OrderActionTypes.GET_ORDERS_FAIL: {
       return { ...state,
         isLoading: false,
         error: action.payload.error
